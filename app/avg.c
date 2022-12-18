@@ -35,7 +35,7 @@ int main( void )
 
     printf("%d plus 4 is %d\n", test1, result1);
 
-    int test2   = -11;
+    int test2   = -43;
     int result2 = incr_by_4( test2 );
 
     printf("%d plus 4 is %d\n", test2, result2);
@@ -44,7 +44,7 @@ int main( void )
 
     // Ad-hoc testing of avg
 
-    int test3     = -3;
+    int test3     = -2;
     int test4     = 24;
     int test5     = 5;
     int result345 = avg( test3, test4, test5 );
