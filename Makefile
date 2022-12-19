@@ -9,30 +9,33 @@
 #----------------------------------------------------
 # Setup
 
-### Set colors because I like pretty colors
-BLUE  =\033[0;34m
-PURPLE=\033[0;35m
-GREEN =\033[0;32m
-RED   =\033[0;31m
-ORANGE=\033[0;33m
-CYAN  =\033[0;36m
-RESET =\033[0m
-
 ### Set compilation and linker flags
 CFLAGS  := -Wall -O3
 LDFLAGS := -lm
 
 ### Set commands correct based on operating system
 
-ifdef OS # Only defined in Windows
-    RM         := del /Q /S /F
-	PATH_SLASH := \
-    TARGETS    := $(basename $(notdir $(wildcard app\*.c)))
-else # Linux
-    RM         := rm -rf
-	PATH_SLASH := /
-    TARGETS    := $(basename $(notdir $(wildcard app/*.c)))
+ifeq ($(OS),Windows_NT)  # Windows
+    RM_BUILD   := if exist build ( rmdir /s /q build )
+
+intro :
+	@echo ########################################
+	@echo ## CRT Build System
+	@echo ########################################
+
 endif
+
+ifneq ($(OS),Windows_NT) # Linux
+    RM_BUILD   := rm -rf build
+
+intro :
+	@echo "########################################"
+	@echo "## CRT Build System"
+	@echo "########################################"
+
+endif
+
+TARGETS := $(basename $(notdir $(wildcard app/*.c)))
 
 #----------------------------------------------------
 # Compilation
@@ -40,30 +43,23 @@ endif
 .PHONY: intro build
 
 all: $(TARGETS)
-	@echo "${GREEN} - All executables built in build directory${RESET}"
-
-intro :
-	@echo ""
-	@echo "${CYAN}########################################${RESET}"
-	@echo "${CYAN}## CRT Build System${RESET}"
-	@echo "${CYAN}########################################${RESET}"
-	@echo ""
+	@echo  - All executables built in build directory
 
 build :
-	@echo "${PURPLE} - Making Clean Build Directory${RESET}"
-	@${RM} build
+	@echo  - Making Clean Build Directory
+	@${RM_BUILD}
 	@mkdir build
 
 $(TARGETS) : intro build
-	$(eval source_file=$(addprefix app$(PATH_SLASH), $(addsuffix .c,$@)))
+	$(eval source_file=$(addprefix app/, $(addsuffix .c,$@)))
 	$(eval target_file=$(basename $(subst app,build,$(source_file))))
 	$(eval eval_file=$(notdir $(target_file)))
 
-	@echo "${ORANGE} - Building Executable: $(eval_file)${RESET}"
+	@echo  - Building Executable: $(eval_file)
 	@gcc $(CFLAGS) $(LDFLAGS) -o $(target_file) $(source_file)
 
 ifneq "$(MAKECMDGOALS)" "all"
 ifneq "$(MAKECMDGOALS)" ""
-	@echo "${GREEN} - Executable built in build directory${RESET}"
+	@echo  - Executable built in build directory
 endif
 endif
