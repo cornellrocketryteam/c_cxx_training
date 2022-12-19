@@ -36,6 +36,7 @@ intro :
 endif
 
 TARGETS := $(basename $(notdir $(wildcard app/*.c)))
+SOURCES := $(subst .c,.o,$(subst src,build,$(wildcard src/*.c)))
 
 #----------------------------------------------------
 # Compilation
@@ -50,13 +51,23 @@ build :
 	@${RM_BUILD}
 	@mkdir build
 
-$(TARGETS) : intro build
+test:
+	echo $(SOURCES)
+
+$(SOURCES) :
+	$(eval source_file=$(subst .o,.c,$(subst build,src,$@)))
+	$(eval file_name=$(notdir $@))
+
+	@echo  - Building Object File: $(file_name)
+	@gcc $(CFLAGS) -c -Isrc -o $@ $(source_file)
+
+$(TARGETS) : intro build $(SOURCES)
 	$(eval source_file=$(addprefix app/, $(addsuffix .c,$@)))
 	$(eval target_file=$(basename $(subst app,build,$(source_file))))
 	$(eval eval_file=$(notdir $(target_file)))
 
 	@echo  - Building Executable: $(eval_file)
-	@gcc $(CFLAGS) $(LDFLAGS) -o $(target_file) $(source_file)
+	@gcc $(CFLAGS) $(LDFLAGS) -Isrc -o $(target_file) $(source_file) $(SOURCES)
 
 ifneq "$(MAKECMDGOALS)" "all"
 ifneq "$(MAKECMDGOALS)" ""
