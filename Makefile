@@ -42,10 +42,8 @@ intro :
 
 build :
 	@echo  - Making Clean Build Directory
-	@echo off
 	@${RM_BUILD}
 	@mkdir build
-	@echo on
 
 $(TARGETS) : intro build
 	$(eval source_file=$(addprefix app/, $(addsuffix .c,$@)))
