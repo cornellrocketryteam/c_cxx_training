@@ -18,10 +18,20 @@ LDFLAGS := -lm
 ifeq ($(OS),Windows_NT)  # Windows
     RM_BUILD   := if exist build ( rmdir /s /q build )
 
+intro :
+	@echo ########################################
+	@echo ## CRT Build System
+	@echo ########################################
+
 endif
 
 ifneq ($(OS),Windows_NT) # Linux
     RM_BUILD   := rm -rf build
+
+intro :
+	@echo "########################################"
+	@echo "## CRT Build System"
+	@echo "########################################"
 
 endif
 
@@ -34,11 +44,6 @@ TARGETS := $(basename $(notdir $(wildcard app/*.c)))
 
 all: $(TARGETS)
 	@echo  - All executables built in build directory
-
-intro :
-	@echo ########################################
-	@echo ## CRT Build System
-	@echo ########################################
 
 build :
 	@echo  - Making Clean Build Directory
