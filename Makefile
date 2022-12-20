@@ -1,7 +1,7 @@
 #====================================================
-# CRT Training Build Framework v1
+# CRT Training Build Framework v2
 #====================================================
-# A build framework that supports single-file
+# A build framework that supports multi-file
 # applications written in C
 
 # Dependencies: GCC
