@@ -14,20 +14,6 @@
 // should implement a list that can store ints
 //=============================================================
 
-typedef struct _Node
-{
-    int node_value;
-    struct _Node* next_node;
-    struct _Node* prev_node;
-} Node;
-
-typedef struct
-{
-    int size;
-    Node* start_node;
-    Node* end_node;
-} DLinkedList;
-
 // Base Functions
 
 void list_construct( DLinkedList* list );
