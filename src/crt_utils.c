@@ -13,6 +13,8 @@ int mem_heap_size = 0;
 //-----------------------------------------------------
 // Allocates the desired space plus the size of an int,
 // so wee can keep track of how much was allocated
+//
+// Credit: ECE2400
 
 void* crt_malloc( size_t size )
 {
@@ -37,6 +39,8 @@ void* crt_malloc( size_t size )
 //-----------------------------------------------------
 // Deallocates the desired space and subtracts the
 // space from our counter
+//
+// Credit: ECE2400
 
 void crt_free( void* ptr )
 {
