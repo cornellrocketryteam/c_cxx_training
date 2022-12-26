@@ -57,10 +57,10 @@ void test_list_contains()
     assert( list_contains( &dlist, 32 ) == 1 );
 
     // Check that it doesn't contain values we don't expect
-    assert( list_contains( &dlist, 3  ) == 1 );
-    assert( list_contains( &dlist, 26 ) == 1 );
-    assert( list_contains( &dlist, 36 ) == 1 );
-    assert( list_contains( &dlist, 78 ) == 1 );
+    assert( list_contains( &dlist, 3  ) == 0 );
+    assert( list_contains( &dlist, 26 ) == 0 );
+    assert( list_contains( &dlist, 36 ) == 0 );
+    assert( list_contains( &dlist, 78 ) == 0 );
 
     list_destruct( &dlist );
 
