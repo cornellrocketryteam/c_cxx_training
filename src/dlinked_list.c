@@ -171,6 +171,7 @@ int list_contains( DLinkedList* list, int value )
         {
             return 1;
         }
+        current_node = current_node->next_node;
     }
 
     // If we've gotten here, we've gone through the
