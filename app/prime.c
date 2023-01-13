@@ -28,7 +28,7 @@
 //  - The function should take in a single int, and output
 //    an int
 //  - The output should be the sum of all non-negative
-//    integers less than the input
+//    prime integers less than the input
 //  - You should use your is_prime function in your
 //    implementation
 //========================================================
