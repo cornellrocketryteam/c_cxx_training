@@ -1,8 +1,9 @@
 #====================================================
-# CRT Training Build Framework v3
+# CRT Training Build Framework v4
 #====================================================
 # A build framework that supports multi-file
-# applications written in C++
+# applications written in C++, explicitly linking
+# C++ standard library for versioning
 
 # Dependencies: GCC
 
@@ -59,7 +60,7 @@ $(SOURCES) :
 	$(eval file_name=$(notdir $@))
 
 	@echo  - Building Object File: $(file_name)
-	@g++ $(CFLAGS) -c -Isrc -o $@ $(source_file)
+	@g++ $(CFLAGS) -c -Isrc -std=c++11 -o $@ $(source_file)
 
 $(TARGETS) : intro build $(SOURCES)
 	$(eval source_file=$(addprefix app/, $(addsuffix .cc,$@)))
@@ -67,7 +68,7 @@ $(TARGETS) : intro build $(SOURCES)
 	$(eval eval_file=$(notdir $(target_file)))
 
 	@echo  - Building Executable: $(eval_file)
-	@g++ $(CFLAGS) $(LDFLAGS) -Isrc -o $(target_file) $(source_file) $(SOURCES)
+	@g++ $(CFLAGS) $(LDFLAGS) -Isrc -std=c++11 -o $(target_file) $(source_file) $(SOURCES)
 
 ifneq "$(MAKECMDGOALS)" "all"
 ifneq "$(MAKECMDGOALS)" ""
