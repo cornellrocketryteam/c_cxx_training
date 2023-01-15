@@ -1,5 +1,5 @@
 #====================================================
-# CRT Training Build Framework v4
+# CRT Training Build Framework v3
 #====================================================
 # A build framework that supports multi-file
 # applications written in C++, explicitly linking
