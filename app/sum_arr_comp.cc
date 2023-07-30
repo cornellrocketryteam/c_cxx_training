@@ -64,4 +64,7 @@ int main( void )
     std::cout << " - Result: " << result2 << std::endl;
     std::cout << " - Execution Time: " << duration2.count() << " microseconds" << std::endl;
     //-----------------------------------------------------
+
+    // Delete our array
+    delete arr;
 }
